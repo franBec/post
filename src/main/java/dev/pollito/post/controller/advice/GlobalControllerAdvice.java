@@ -34,7 +34,7 @@ public class GlobalControllerAdvice {
 
   @NotNull
   private ProblemDetail buildProblemDetail(@NotNull Exception e, HttpStatus status) {
-    log.error(e.getClass().getSimpleName() + " being handled", e);
+    log.error("{} being handled", e.getClass().getSimpleName(), e);
     ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(status, e.getLocalizedMessage());
     problemDetail.setProperty("timestamp", DateTimeFormatter.ISO_INSTANT.format(Instant.now()));
     problemDetail.setProperty("trace", Span.current().getSpanContext().getTraceId());
