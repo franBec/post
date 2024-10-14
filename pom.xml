@@ -222,7 +222,7 @@
                 <version>7.8.0</version>
                 <executions>
                     <execution>
-                        <id>provider generation - post.yaml</id>
+                        <id>spring (server) generation - post.yaml</id>
                         <goals>
                             <goal>generate</goal>
                         </goals>
@@ -241,7 +241,7 @@
                         </configuration>
                     </execution>
                     <execution>
-                        <id>consumer generation - jsonplaceholder.yaml</id>
+                        <id>java (client) generation - jsonplaceholder.yaml</id>
                         <goals>
                             <goal>generate</goal>
                         </goals>

@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: post - Pollito Over Spring-Boot Template
+  title: post - Pollito Opinionated Spring-Boot Template
   description: Example of a Spring Boot 3 project with various practices that Pollito thinks are good
   version: 1.0.0
   contact:
