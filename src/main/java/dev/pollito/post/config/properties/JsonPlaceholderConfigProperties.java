@@ -12,4 +12,5 @@ import org.springframework.context.annotation.Configuration;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class JsonPlaceholderConfigProperties {
   String baseUrl;
+  Integer expiresAfter;
 }
