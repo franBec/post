@@ -15,15 +15,46 @@ paths:
         - User
       operationId: getUsers
       summary: Get list of all users
+      parameters:
+        - description: Use this parameter to specify the page of your request
+          in: query
+          name: pageNumber
+          schema:
+            default: 0
+            minimum: 0
+            type: integer
+        - description: Use this parameter to specify a pagination limit (number of results per page) for your request
+          in: query
+          name: pageSize
+          schema:
+            default: 10
+            maximum: 10
+            minimum: 1
+            type: integer
+        - description: Use this parameter to specify the property by which you want to sort the results of your request
+          in: query
+          name: sortProperty
+          schema:
+            $ref: '#/components/schemas/UserSortProperty'
+        - description: Use this parameter to specify the direction (asc or desc) of your request results
+          in: query
+          name: sortDirection
+          schema:
+            $ref: '#/components/schemas/SortDirection'
+        - description: Use this parameter to filter users by checking if provided string is part of email, name, or username. If not used, no filtering will be done.
+          in: query
+          name: q
+          schema:
+            minLength: 2
+            maxLength: 30
+            type: string
       responses:
         '200':
           description: List of all users
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/User'
+                $ref: '#/components/schemas/Users'
         default:
           description: Error
           content:
@@ -113,6 +144,21 @@ components:
           example: "81.1496"
           type: string
       type: object
+    Pageable:
+      type: object
+      properties:
+        pageNumber:
+          description: Current page number (starts from 0)
+          example: 0
+          type: integer
+        pageSize:
+          description: Number of items retrieved on this page
+          example: 1
+          type: integer
+    SortDirection:
+      type: string
+      enum: [ ASC, DESC ]
+      default: ASC
     User:
       properties:
         address:
@@ -144,3 +190,25 @@ components:
           example: "hildegard.org"
           type: string
       type: object
+    Users:
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+        total:
+          description: Total number of items that meet the criteria
+          example: 10
+          type: integer
+      type: object
+    UserSortProperty:
+      enum: [
+        email,
+        id,
+        name,
+        username
+      ]
+      default: id
+      type: string

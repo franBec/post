@@ -1,8 +1,14 @@
 package dev.pollito.post.service;
 
-import dev.pollito.post.model.User;
-import java.util.List;
+import dev.pollito.post.model.SortDirection;
+import dev.pollito.post.model.UserSortProperty;
+import dev.pollito.post.model.Users;
 
 public interface UserService {
-  List<User> getUsers();
+  Users getUsers(
+      Integer pageNumber,
+      Integer pageSize,
+      UserSortProperty sortProperty,
+      SortDirection sortDirection,
+      String q);
 }
