@@ -4,6 +4,7 @@ import dev.pollito.post.exception.JsonPlaceholderException;
 import io.opentelemetry.api.trace.Span;
 import java.time.Instant;
 import java.time.format.DateTimeFormatter;
+import java.util.NoSuchElementException;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpStatus;
@@ -25,6 +26,11 @@ public class GlobalControllerAdvice {
   public ProblemDetail handle(@NotNull JsonPlaceholderException e) {
     return buildProblemDetail(
         e, e.getStatus() == 400 ? HttpStatus.BAD_REQUEST : HttpStatus.INTERNAL_SERVER_ERROR);
+  }
+
+  @ExceptionHandler(NoSuchElementException.class)
+  public ProblemDetail handle(@NotNull NoSuchElementException e) {
+    return buildProblemDetail(e, HttpStatus.NOT_FOUND);
   }
 
   @ExceptionHandler(Exception.class)

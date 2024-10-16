@@ -10,6 +10,7 @@ import dev.pollito.post.model.SortDirection;
 import dev.pollito.post.model.UserSortProperty;
 import dev.pollito.post.model.Users;
 import dev.pollito.post.service.impl.UserServiceImpl;
+import java.util.NoSuchElementException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -73,5 +74,15 @@ class UserServiceTest {
 
     assertEquals("Antonette", sortByUsername.getContent().getFirst().getUsername());
     assertEquals("Samantha", sortByUsername.getContent().getLast().getUsername());
+  }
+
+  @Test
+  void whenGetUserThenReturnUser() {
+    assertNotNull(userService.getUser(1));
+  }
+
+  @Test
+  void whenGetUserThatDoesntExistThenThrowException() {
+    assertThrows(NoSuchElementException.class, () -> userService.getUser(-1));
   }
 }

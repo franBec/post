@@ -61,6 +61,32 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+  /users/{id}:
+    get:
+      tags:
+        - User
+      operationId: getUser
+      summary: Get user by matching its id
+      parameters:
+        - description: User id
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: A user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 components:
   schemas:
     Address:

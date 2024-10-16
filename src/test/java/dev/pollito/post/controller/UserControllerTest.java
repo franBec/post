@@ -6,6 +6,7 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 import dev.pollito.post.model.SortDirection;
+import dev.pollito.post.model.User;
 import dev.pollito.post.model.UserSortProperty;
 import dev.pollito.post.model.Users;
 import dev.pollito.post.service.UserService;
@@ -34,6 +35,14 @@ class UserControllerTest {
 
     ResponseEntity<Users> response =
         userController.getUsers(0, 10, UserSortProperty.ID, SortDirection.ASC, "q");
+    assertEquals(HttpStatus.OK, response.getStatusCode());
+    assertNotNull(response.getBody());
+  }
+
+  @Test
+  void whenGetUserThenReturn200() {
+    when(userService.getUser(any(Integer.class))).thenReturn(new User());
+    ResponseEntity<User> response = userController.getUser(1);
     assertEquals(HttpStatus.OK, response.getStatusCode());
     assertNotNull(response.getBody());
   }

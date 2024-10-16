@@ -2,6 +2,7 @@ package dev.pollito.post.controller;
 
 import dev.pollito.post.api.UsersApi;
 import dev.pollito.post.model.SortDirection;
+import dev.pollito.post.model.User;
 import dev.pollito.post.model.UserSortProperty;
 import dev.pollito.post.model.Users;
 import dev.pollito.post.service.UserService;
@@ -23,5 +24,10 @@ public class UserController implements UsersApi {
       String q) {
     return ResponseEntity.ok(
         userService.getUsers(pageNumber, pageSize, sortProperty, sortDirection, q));
+  }
+
+  @Override
+  public ResponseEntity<User> getUser(Integer id) {
+    return ResponseEntity.ok(userService.getUser(id));
   }
 }

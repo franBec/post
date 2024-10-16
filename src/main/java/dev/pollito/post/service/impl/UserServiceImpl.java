@@ -1,8 +1,6 @@
 package dev.pollito.post.service.impl;
 
-import static dev.pollito.post.config.CacheConfig.JSON_PLACEHOLDER_CACHE;
-
-import com.typicode.jsonplaceholder.api.UserApi;
+import dev.pollito.post.api.cache.UserApiCache;
 import dev.pollito.post.mapper.UserMapper;
 import dev.pollito.post.model.Pageable;
 import dev.pollito.post.model.SortDirection;
@@ -12,16 +10,16 @@ import dev.pollito.post.model.Users;
 import dev.pollito.post.service.UserService;
 import java.util.Comparator;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
-  private final UserApi userApi;
+  private final UserApiCache userApi;
   private final UserMapper userMapper;
 
   @Override
@@ -41,8 +39,16 @@ public class UserServiceImpl implements UserService {
         .total(users.size());
   }
 
-  @Cacheable(value = JSON_PLACEHOLDER_CACHE)
-  private List<User> getUsersFromApi() {
+  @Override
+  public User getUser(Integer id) {
+    List<User> users = getUsersFromApi();
+    return users.stream()
+        .filter(user -> user.getId().equals(id))
+        .findFirst()
+        .orElseThrow(NoSuchElementException::new);
+  }
+
+  public List<User> getUsersFromApi() {
     return userMapper.map(userApi.getUsers());
   }
 

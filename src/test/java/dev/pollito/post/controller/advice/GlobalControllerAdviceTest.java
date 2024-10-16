@@ -5,6 +5,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import dev.pollito.post.exception.JsonPlaceholderException;
+import java.util.NoSuchElementException;
 import java.util.stream.Stream;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -49,6 +50,12 @@ class GlobalControllerAdviceTest {
 
     ProblemDetail response = globalControllerAdvice.handle(e);
     problemDetailAssertions(response, httpStatus);
+  }
+
+  @Test
+  void whenNoSuchElementExceptionThenReturnProblemDetail() {
+    ProblemDetail response = globalControllerAdvice.handle(mock(NoSuchElementException.class));
+    problemDetailAssertions(response, HttpStatus.NOT_FOUND);
   }
 
   @Test
