@@ -4,11 +4,11 @@ import static dev.pollito.post.MockData.USERS;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
-import com.typicode.jsonplaceholder.api.UserApi;
 import dev.pollito.post.mapper.UserMapper;
 import dev.pollito.post.model.SortDirection;
 import dev.pollito.post.model.UserSortProperty;
 import dev.pollito.post.model.Users;
+import dev.pollito.post.service.impl.UserApiImpl;
 import dev.pollito.post.service.impl.UserServiceImpl;
 import java.util.NoSuchElementException;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,7 +23,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 @ExtendWith(MockitoExtension.class)
 class UserServiceTest {
   @InjectMocks private UserServiceImpl userService;
-  @Mock private UserApi userApi;
+  @Mock private UserApiImpl userApi;
   @Spy private UserMapper userMapper = Mappers.getMapper(UserMapper.class);
 
   @BeforeEach

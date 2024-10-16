@@ -1,4 +1,4 @@
-package dev.pollito.post.api.cache;
+package dev.pollito.post.service.impl;
 
 import static dev.pollito.post.config.CacheConfig.JSON_PLACEHOLDER_CACHE;
 
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class UserApiCache implements UserApi {
+public class UserApiImpl implements UserApi {
   private final UserApi delegate;
 
   @Override

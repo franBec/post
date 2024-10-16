@@ -1,6 +1,5 @@
 package dev.pollito.post.service.impl;
 
-import dev.pollito.post.api.cache.UserApiCache;
 import dev.pollito.post.mapper.UserMapper;
 import dev.pollito.post.model.Pageable;
 import dev.pollito.post.model.SortDirection;
@@ -19,7 +18,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
-  private final UserApiCache userApi;
+  private final UserApiImpl userApi;
   private final UserMapper userMapper;
 
   @Override
@@ -48,7 +47,7 @@ public class UserServiceImpl implements UserService {
         .orElseThrow(NoSuchElementException::new);
   }
 
-  public List<User> getUsersFromApi() {
+  private List<User> getUsersFromApi() {
     return userMapper.map(userApi.getUsers());
   }
 
