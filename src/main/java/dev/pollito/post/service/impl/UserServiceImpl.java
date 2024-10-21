@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
-  private final UserApiImpl userApi;
+  private final UserApiCacheServiceImpl userApi;
   private final UserMapper userMapper;
 
   @Override
@@ -40,8 +40,7 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public User getUser(Integer id) {
-    List<User> users = getUsersFromApi();
-    return users.stream()
+    return getUsersFromApi().stream()
         .filter(user -> user.getId().equals(id))
         .findFirst()
         .orElseThrow(NoSuchElementException::new);
