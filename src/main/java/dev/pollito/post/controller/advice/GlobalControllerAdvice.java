@@ -1,6 +1,5 @@
 package dev.pollito.post.controller.advice;
 
-import dev.pollito.post.exception.JsonPlaceholderException;
 import io.opentelemetry.api.trace.Span;
 import java.time.Instant;
 import java.time.format.DateTimeFormatter;
@@ -20,12 +19,6 @@ public class GlobalControllerAdvice {
   @ExceptionHandler(NoResourceFoundException.class)
   public ProblemDetail handle(@NotNull NoResourceFoundException e) {
     return buildProblemDetail(e, HttpStatus.NOT_FOUND);
-  }
-
-  @ExceptionHandler(JsonPlaceholderException.class)
-  public ProblemDetail handle(@NotNull JsonPlaceholderException e) {
-    return buildProblemDetail(
-        e, e.getStatus() == 400 ? HttpStatus.BAD_REQUEST : HttpStatus.INTERNAL_SERVER_ERROR);
   }
 
   @ExceptionHandler(NoSuchElementException.class)

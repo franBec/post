@@ -3,9 +3,6 @@ cors:
   allowed-methods: GET, POST, PUT, DELETE, PATCH
   allowed-headers: "*"
   allow-credentials: true
-jsonplaceholder:
-  baseUrl: https://jsonplaceholder.typicode.com/
-  expiresAfter: 24 #hours
 logging:
   level:
     org.hibernate.SQL: DEBUG
