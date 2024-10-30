@@ -28,7 +28,8 @@ public class UserServiceImpl implements UserService {
       @NotNull SortDirection sortDirection,
       String q) {
     return userMapper.map(
-        userRepository.findAll(
+        userRepository.findAllByQuery(
+            q,
             PageRequest.of(
                 pageNumber,
                 pageSize,

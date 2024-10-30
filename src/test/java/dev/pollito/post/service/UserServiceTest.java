@@ -22,7 +22,6 @@ import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 
 @ExtendWith(MockitoExtension.class)
 class UserServiceTest {
@@ -35,7 +34,7 @@ class UserServiceTest {
 
   @Test
   void whenGetUsersThenReturnusers() {
-    when(userRepository.findAll(any(Pageable.class)))
+    when(userRepository.findAllByQuery(any(), any(PageRequest.class)))
         .thenReturn(new PageImpl<>(List.of(), PageRequest.of(0, 10), 0));
     assertNotNull(userService.getUsers(0, 10, UserSortProperty.ID, SortDirection.ASC, null));
   }
