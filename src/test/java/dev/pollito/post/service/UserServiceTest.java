@@ -24,8 +24,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 class UserServiceTest {
   @InjectMocks private UserServiceImpl userService;
   @Mock private UserApiCacheServiceImpl userApi;
+
   @SuppressWarnings("unused")
-  @Spy private UserMapper userMapper = Mappers.getMapper(UserMapper.class);
+  @Spy
+  private UserMapper userMapper = Mappers.getMapper(UserMapper.class);
 
   @BeforeEach
   void setUp() {
